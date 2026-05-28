@@ -36,7 +36,18 @@ export function useSearch() {
       label: `${item.type} ${item.id}`,
       meta: item.from || item.to || "",
     }));
-...
+    const account = connectedAddress
+      ? [{
+          id: `account-${connectedAddress}`,
+          type: "account",
+          hash: connectedAddress,
+          memo: "",
+          created_at: "",
+          label: connectedAddress,
+          meta: "Connected account",
+        }]
+      : [];
+
     return [...account, ...tx, ...ops];
   }, [transactions, operations, connectedAddress, searchFilters]);
 
